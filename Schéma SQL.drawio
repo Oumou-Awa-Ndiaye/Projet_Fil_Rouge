@@ -1,0 +1,34 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram name="Page-1" id="xFAuWNvtBlmcKOx4RcSZ">
+    <mxGraphModel dx="1117" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;patient_id SERIAL PRIMARY KEY&lt;div&gt;Nom VARCHAR(64) AES-256&lt;/div&gt;&lt;div&gt;Prénom VARCHAR(64) AES-256&lt;/div&gt;&lt;div&gt;Date_naissance CHAR(10)&lt;/div&gt;&lt;div&gt;Num_secu CHAR(32) AES-256&lt;/div&gt;&lt;div&gt;RGPD BOOLEAN&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="220" x="90" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Patients&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="100" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Dossier_id SERIAL PRIMARY KEY&lt;/div&gt;patient_id FK -&amp;gt; Patients&lt;div&gt;Date_admission TIMESTAMP&lt;/div&gt;&lt;div&gt;Medecin_id FK -&amp;gt; Personnel&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Diagnostic TEXT AES-256&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="260" x="340" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Dossiers_medicaux&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="240" x="350" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;prescription_id SERIAL PRIMARY KEY&lt;div&gt;Patient_id FK -&amp;gt; Patients&lt;/div&gt;&lt;div&gt;Medecin_id FK -&amp;gt; Personnel&lt;/div&gt;&lt;div&gt;Date_debut TIMESTAMP&lt;/div&gt;&lt;div&gt;Date_fin DATE&lt;/div&gt;&lt;div&gt;Medicament VARCHAR(50)&lt;/div&gt;&lt;div&gt;Posologie VARCHAR(20)&lt;/div&gt;&lt;div&gt;Dosage FLOAT(4,2)&lt;/div&gt;&lt;div&gt;Unite VARCHAR(4)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="220" x="630" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Prescriptions&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="640" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Personnel_id SERIAL PRIMARY KEY&lt;div&gt;Nom VARCHAR(64) AES-256&lt;/div&gt;&lt;div&gt;Prénom VARCHAR(64) AES-256&lt;/div&gt;&lt;div&gt;Date_naissance CHAR(10)&lt;/div&gt;&lt;div&gt;Profession VARCHAR(80)&lt;/div&gt;&lt;div&gt;Service VARCHAR(20)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="220" x="360" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ij8GGQ8qjoyk4XgQ0xSa-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Personnel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="370" y="350" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

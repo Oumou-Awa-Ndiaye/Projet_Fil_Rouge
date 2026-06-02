@@ -1,0 +1,422 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="s8zs5NF6Gw9DZZpF22HY" name="Page-1">
+    <mxGraphModel dx="2058" dy="1087" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" visible="0" />
+        <mxCell id="page1" parent="0" style="page;" value="Schéma Logique" visible="0" />
+        <mxCell id="L_title" parent="page1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;fontColor=#1F4E79;" value="🏥 Hôpital Municipal — Schéma Réseau LOGIQUE" vertex="1">
+          <mxGeometry height="40" width="1100" x="300" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="L_subtitle" parent="page1" style="text;html=1;strokeColor=none;fillColor=#fff2cc;strokeColor=#d6b656;align=center;fontSize=11;fontStyle=2;" value="Redondance : Pare-feu HA (Actif/Passif) + Double Switch Cœur (HSRP) + Double lien FAI" vertex="1">
+          <mxGeometry height="26" width="1100" x="300" y="62" as="geometry" />
+        </mxCell>
+        <mxCell id="L_internet" parent="page1" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;fontColor=#1F4E79;" value="🌐 INTERNET" vertex="1">
+          <mxGeometry height="90" width="200" x="620" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_fai1" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value="📡 FAI 1 (Principal)&#xa;Fibre 1 Gbps" vertex="1">
+          <mxGeometry height="50" width="150" x="460" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="L_fai2" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="📡 FAI 2 (Secours)&#xa;Fibre 500 Mbps" vertex="1">
+          <mxGeometry height="50" width="150" x="830" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_inet_fai1" edge="1" parent="page1" source="L_internet" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;strokeWidth=2;" target="L_fai1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_inet_fai2" edge="1" parent="page1" source="L_internet" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=2;dashed=1;" target="L_fai2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_fw1" parent="page1" style="shape=mxgraph.cisco.firewalls.firewall;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;aspect=fixed;" value="🔥 PARE-FEU #1&#xa;pfSense ACTIF&#xa;10.0.0.254" vertex="1">
+          <mxGeometry height="60" width="70" x="550" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="L_fw2" parent="page1" style="shape=mxgraph.cisco.firewalls.firewall;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;aspect=fixed;" value="🔥 PARE-FEU #2&#xa;pfSense PASSIF&#xa;10.0.0.253" vertex="1">
+          <mxGeometry height="60" width="70" x="820" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="L_fw_ha" edge="1" parent="page1" source="L_fw1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF0000;strokeWidth=2;dashed=1;fontColor=#FF0000;fontSize=9;fontStyle=2;" target="L_fw2" value="🔗 Lien HA&#xa;(Sync)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fai1_fw1" edge="1" parent="page1" source="L_fai1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;" target="L_fw1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fai2_fw2" edge="1" parent="page1" source="L_fai2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;strokeWidth=2;dashed=1;" target="L_fw2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_core1" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=10;fontStyle=1;arcSize=8;" value="⚙️ SWITCH CŒUR #1 (L3)&#xa;Cisco Catalyst — HSRP Actif&#xa;10.0.0.1" vertex="1">
+          <mxGeometry height="55" width="280" x="430" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="L_core2" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#7F6000;fontSize=10;fontStyle=1;arcSize=8;" value="⚙️ SWITCH CŒUR #2 (L3)&#xa;Cisco Catalyst — HSRP Passif&#xa;10.0.0.2" vertex="1">
+          <mxGeometry height="55" width="280" x="750" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="L_core_hsrp" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF0000;strokeWidth=2;dashed=1;fontColor=#FF0000;fontSize=9;fontStyle=2;" target="L_core2" value="🔗 HSRP / Trunk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw1_c1" edge="1" parent="page1" source="L_fw1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;" target="L_core1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw2_c2" edge="1" parent="page1" source="L_fw2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;strokeWidth=2;dashed=1;" target="L_core2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw1_c2" edge="1" parent="page1" source="L_fw1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=1;dashed=1;opacity=50;" target="L_core2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw2_c1" edge="1" parent="page1" source="L_fw2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;strokeWidth=1;dashed=1;opacity=50;" target="L_core1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_dmz" parent="page1" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;fontColor=#375623;" value="DMZ — VLAN 99 (192.168.99.0/24)" vertex="1">
+          <mxGeometry height="120" width="340" x="1120" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="L_docker" parent="L_dmz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="🐳 SRV-DOCKER-01&#xa;192.168.99.10&#xa;Portail patient" vertex="1">
+          <mxGeometry height="55" width="140" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_nginx" parent="L_dmz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="🌐 Reverse Proxy&#xa;192.168.99.11&#xa;Nginx" vertex="1">
+          <mxGeometry height="55" width="140" x="175" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw_dmz" edge="1" parent="page1" source="L_fw1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;dashed=1;" target="L_dmz">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_v10" parent="page1" style="swimlane;startSize=28;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;fontColor=#C00000;" value="🚨 URGENCES — VLAN 10 (192.168.10.0/24)" vertex="1">
+          <mxGeometry height="170" width="340" x="30" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="L_sw_urg" parent="L_v10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="🔀 Switch Access&#xa;VLAN 10" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_pc_urg" parent="L_v10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="💻 Postes médicaux&#xa;.20 – .50" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_mon_urg" parent="L_v10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="📟 Moniteurs&#xa;.100 – .150" vertex="1">
+          <mxGeometry height="45" width="120" x="205" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_ap_urg" parent="L_v10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="📶 AP WiFi&#xa;.200" vertex="1">
+          <mxGeometry height="45" width="120" x="205" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_v10" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2;" target="L_v10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c2_v10" edge="1" parent="page1" source="L_core2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=1;dashed=1;opacity=60;" target="L_v10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_v20" parent="page1" style="swimlane;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;fontColor=#1F4E79;" value="🏢 ADMINISTRATION — VLAN 20 (192.168.20.0/24)" vertex="1">
+          <mxGeometry height="260" width="620" x="420" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="L_sw_adm" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="🔀 Switch Access&#xa;VLAN 20" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_pc_adm" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="💻 Postes admin&#xa;.20 – .80" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_ad" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="🖥️ SRV-AD-01&#xa;.10 — AD/DNS" vertex="1">
+          <mxGeometry height="45" width="130" x="155" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_sql" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="🗄️ SRV-SQL-01&#xa;.11 — Base SQL" vertex="1">
+          <mxGeometry height="45" width="130" x="305" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_sql2" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="🗄️ SRV-SQL-02&#xa;.12 — SQL Réplica&#xa;(Redondance)" vertex="1">
+          <mxGeometry height="45" width="130" x="455" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_file" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="📁 SRV-FILE-01&#xa;.13 — NAS" vertex="1">
+          <mxGeometry height="45" width="130" x="155" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_backup" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="💾 SRV-BACKUP&#xa;.14 — Sauvegarde" vertex="1">
+          <mxGeometry height="45" width="130" x="305" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L_srv_ad2" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="🖥️ SRV-AD-02&#xa;.15 — AD Réplica&#xa;(Redondance)" vertex="1">
+          <mxGeometry height="45" width="130" x="455" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="L_printer" parent="L_v20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="🖨️ Imprimantes&#xa;.200 – .210" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_v20" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;strokeWidth=2;" target="L_v20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c2_v20" edge="1" parent="page1" source="L_core2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=1;dashed=1;opacity=60;" target="L_v20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_v30" parent="page1" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;fontColor=#375623;" value="🔬 LABORATOIRE — VLAN 30 (192.168.30.0/24)" vertex="1">
+          <mxGeometry height="170" width="380" x="1100" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="L_sw_lab" parent="L_v30" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="🔀 Switch Access&#xa;VLAN 30" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_pc_lab" parent="L_v30" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="💻 Postes biologistes&#xa;.20 – .40" vertex="1">
+          <mxGeometry height="45" width="120" x="15" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_analyseur" parent="L_v30" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="🧪 Analyseurs auto&#xa;.100 – .120" vertex="1">
+          <mxGeometry height="45" width="120" x="155" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="L_mongo" parent="L_v30" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="🗄️ SRV-MONGO-01&#xa;.10 — NoSQL" vertex="1">
+          <mxGeometry height="45" width="120" x="245" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_v30" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;" target="L_v30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c2_v30" edge="1" parent="page1" source="L_core2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=1;dashed=1;opacity=60;" target="L_v30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_v40" parent="page1" style="swimlane;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;fontColor=#7F6000;" value="📡 IoT / MÉDICAL — VLAN 40 (192.168.40.0/24)" vertex="1">
+          <mxGeometry height="100" width="340" x="30" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="L_iot" parent="L_v40" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="💉 Pompes / ECG / Capteurs — .10–.200&#xa;⚠️ Isolé — surveillance SIEM uniquement" vertex="1">
+          <mxGeometry height="50" width="305" x="15" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_v40" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=2;dashed=1;" target="L_v40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_v50" parent="page1" style="swimlane;startSize=28;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;fontColor=#4D1F7C;" value="📶 WIFI PATIENTS — VLAN 50 (192.168.50.0/24)" vertex="1">
+          <mxGeometry height="100" width="340" x="420" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="L_wifi" parent="L_v50" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" value="📱 Smartphones / Tablettes — .50–.200&#xa;🔒 Portail captif — Internet uniquement" vertex="1">
+          <mxGeometry height="50" width="305" x="15" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_v50" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;strokeWidth=2;dashed=1;" target="L_v50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_mgmt" parent="page1" style="swimlane;startSize=28;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="⚙️ MANAGEMENT — 10.0.0.0/24" vertex="1">
+          <mxGeometry height="90" width="380" x="30" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="L_siem" parent="L_mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" value="🛡️ SIEM Wazuh&#xa;10.0.0.10" vertex="1">
+          <mxGeometry height="45" width="110" x="10" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L_adm_pc" parent="L_mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" value="👨‍💻 Admin Réseau&#xa;10.0.0.50 (MFA)" vertex="1">
+          <mxGeometry height="45" width="110" x="135" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L_ntp" parent="L_mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" value="🕐 NTP&#xa;10.0.0.20" vertex="1">
+          <mxGeometry height="45" width="110" x="260" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_c1_mgmt" edge="1" parent="page1" source="L_core1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#666666;strokeWidth=2;" target="L_mgmt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_aws" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#FF6600;fontSize=11;fontStyle=1;fontColor=#FFFFFF;arcSize=15;" value="☁️ AWS CLOUD&#xa;VPC + EC2 + S3&#xa;(eu-west-3 Paris)" vertex="1">
+          <mxGeometry height="70" width="160" x="940" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L_aws_s3" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF6600;fontSize=9;" value="🪣 S3&#xa;Sauvegarde chiffrée" vertex="1">
+          <mxGeometry height="40" width="120" x="940" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="L_aws_ec2" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF6600;fontSize=9;" value="🖥️ EC2&#xa;Docker portail" vertex="1">
+          <mxGeometry height="40" width="120" x="1080" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_fw_aws" edge="1" parent="page1" source="L_fw1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF6600;strokeWidth=2;dashed=1;fontColor=#FF6600;fontSize=9;fontStyle=2;" target="L_aws" value="VPN IPSec&#xa;chiffré AES-256">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="360" />
+              <mxPoint x="850" y="135" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L_vpn" parent="page1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=2;" value="🏠 Médecins télétravail&#xa;VPN SSL + MFA" vertex="1">
+          <mxGeometry height="55" width="180" x="280" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_vpn_fw" edge="1" parent="page1" source="L_vpn" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;strokeWidth=2;dashed=1;" target="L_fw1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L_e_urg_lab" edge="1" parent="page1" source="L_v10" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#375623;strokeWidth=2;fontColor=#375623;fontSize=9;fontStyle=2;" target="L_v30" value="✅ Résultats analyses (HTTPS/443)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="570" />
+              <mxPoint x="1290" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L_legend" parent="page1" style="swimlane;startSize=24;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="LÉGENDE" vertex="1">
+          <mxGeometry height="200" width="360" x="820" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg1" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;" value="━━━  Lien principal actif" vertex="1">
+          <mxGeometry height="20" width="220" x="10" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg2" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;" value="╌╌╌  Lien redondant / VPN chiffré" vertex="1">
+          <mxGeometry height="20" width="250" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg3" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#FF0000;" value="🔴  Lien HA (Haute Disponibilité)" vertex="1">
+          <mxGeometry height="20" width="250" x="10" y="72" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg4" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#7F6000;" value="🟡  Équipement / lien de secours (passif)" vertex="1">
+          <mxGeometry height="20" width="280" x="10" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg5" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#FF6600;" value="🟠  AWS Cloud (eu-west-3 Paris)" vertex="1">
+          <mxGeometry height="20" width="260" x="10" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg6" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=2;" value="FW HA : Actif/Passif — bascule auto en &lt; 1s" vertex="1">
+          <mxGeometry height="20" width="310" x="10" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="L_lg7" parent="L_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=2;" value="HSRP : Double switch cœur — bascule en &lt; 3s" vertex="1">
+          <mxGeometry height="20" width="310" x="10" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="page2" parent="0" style="page;" value="Schéma Physique" />
+        <mxCell id="P_title" parent="page2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;fontColor=#1F4E79;" value="Hôpital Municipal — Schéma Réseau PHYSIQUE" vertex="1">
+          <mxGeometry height="40" width="1100" x="230" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="P_datacenter" parent="page2" style="swimlane;startSize=32;fillColor=#f5f5f5;strokeColor=#333333;fontSize=12;fontStyle=1;strokeWidth=3;" value=" SALLE SERVEURS / DATACENTER — Bâtiment Central (RDC)" vertex="1">
+          <mxGeometry height="330" width="730" x="360" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="P_rack1" parent="P_datacenter" style="shape=mxgraph.rack.rack;whiteSpace=wrap;container=0;collapsible=0;childLayout=rack;rackLayout=1;rackUnits=12;unitSize=15;unitFirstCharacter=1;currentUnit=0;unitPrefix=U;mountableUnitSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value=" BAIE 1&#xa;Réseau" vertex="1">
+          <mxGeometry height="225" width="150" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="P_fw1_rack" parent="P_rack1" style="shape=mxgraph.rack.cisco.cisco_firewall_service_module;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" value="pfSense FW #1 (ACTIF)" vertex="1">
+          <mxGeometry height="30" width="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P_fw2_rack" parent="P_rack1" style="shape=mxgraph.rack.cisco.cisco_firewall_service_module;html=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" value="pfSense FW #2 (PASSIF)" vertex="1">
+          <mxGeometry height="30" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P_core1_rack" parent="P_rack1" style="shape=mxgraph.rack.cisco.cisco_catalyst_702x_702x_series;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" value="Switch Cœur L3 #1 (HSRP)" vertex="1">
+          <mxGeometry height="30" width="150" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P_core2_rack" parent="P_rack1" style="shape=mxgraph.rack.cisco.cisco_catalyst_702x_702x_series;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="Switch Cœur L3 #2 (HSRP)" vertex="1">
+          <mxGeometry height="30" width="150" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="P_patch1" parent="P_rack1" style="shape=mxgraph.rack.patch_702panel_702-702empty;html=1;whiteSpace=wrap;fontSize=9;" value="Patch Panel 48 ports" vertex="1">
+          <mxGeometry height="30" width="150" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="P_ups1" parent="P_rack1" style="shape=mxgraph.rack.apc_702-702702kva_smart-ups;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="&amp;nbsp;Onduleur UPS 3kVA" vertex="1">
+          <mxGeometry height="50" width="150" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P_rack2" parent="P_datacenter" style="shape=mxgraph.rack.rack;whiteSpace=wrap;container=0;collapsible=0;childLayout=rack;rackLayout=1;rackUnits=12;unitSize=15;unitFirstCharacter=1;currentUnit=0;unitPrefix=U;mountableUnitSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value="BAIE 2&#xa;Serveurs" vertex="1">
+          <mxGeometry height="225" width="150" x="230" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="P_srv_ad1" parent="P_rack2" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="SRV-AD-01 (AD/DNS)" vertex="1">
+          <mxGeometry height="30" width="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P_srv_ad2" parent="P_rack2" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="&amp;nbsp;SRV-AD-02 (Réplica)" vertex="1">
+          <mxGeometry height="30" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P_srv_sql1" parent="P_rack2" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="SRV-SQL-01 (BDD)" vertex="1">
+          <mxGeometry height="30" width="150" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P_srv_sql2" parent="P_rack2" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" value="&amp;nbsp;SRV-SQL-02 (Réplica)" vertex="1">
+          <mxGeometry height="30" width="150" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="P_srv_siem" parent="P_rack2" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" value="&amp;nbsp;SRV-SIEM (Wazuh)" vertex="1">
+          <mxGeometry height="30" width="150" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="P_ups2" parent="P_rack2" style="shape=mxgraph.rack.apc_702-702702kva_smart-ups;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="&amp;nbsp;Onduleur UPS 3kVA" vertex="1">
+          <mxGeometry height="50" width="150" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P_rack3" parent="P_datacenter" style="shape=mxgraph.rack.rack;whiteSpace=wrap;container=0;collapsible=0;childLayout=rack;rackLayout=1;rackUnits=12;unitSize=15;unitFirstCharacter=1;currentUnit=0;unitPrefix=U;mountableUnitSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="BAIE 3&#xa;Stockage" vertex="1">
+          <mxGeometry height="225" width="150" x="430" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="P_nas" parent="P_rack3" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="&amp;nbsp;NAS (SRV-FILE-01)" vertex="1">
+          <mxGeometry height="30" width="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P_backup" parent="P_rack3" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" value="&amp;nbsp;SRV-BACKUP-01" vertex="1">
+          <mxGeometry height="30" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P_mongo" parent="P_rack3" style="shape=mxgraph.rack.server_702u;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="SRV-MONGO-01 (NoSQL)" vertex="1">
+          <mxGeometry height="30" width="150" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P_ups3" parent="P_rack3" style="shape=mxgraph.rack.apc_702-702702kva_smart-ups;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="&amp;nbsp;Onduleur UPS 3kVA" vertex="1">
+          <mxGeometry height="50" width="150" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-14" parent="P_datacenter" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;BAIE 1&lt;/b&gt;&lt;div&gt;&lt;b&gt;Serveurs&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="80" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-18" parent="P_datacenter" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;BAIE 3&lt;/b&gt;&lt;div&gt;&lt;b&gt;Serveurs&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="480" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-16" parent="P_datacenter" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;BAIE 2&lt;/b&gt;&lt;div&gt;&lt;b&gt;Serveurs&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="280" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="P_batA" parent="page2" style="swimlane;startSize=32;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;fontColor=#C00000;strokeWidth=2;" value=" BÂTIMENT A — URGENCES" vertex="1">
+          <mxGeometry height="380" width="360" x="30" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="P_sw_urg_phy" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="Switch Access 24p&lt;br&gt;Cisco 2960 — VLAN 10&lt;br&gt;Salle réseau RDC" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_ap_urg_phy" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="&amp;nbsp;Borne WiFi&lt;br&gt;Cisco Aironet&lt;br&gt;Couloir RDC" vertex="1">
+          <mxGeometry height="60" width="140" x="190" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_pc_urg_phy" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="6 postes médicaux&lt;br&gt;Câble RJ45 Cat6A&lt;br&gt;Salle de soins" vertex="1">
+          <mxGeometry height="60" width="140" x="20" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="P_mon_phy" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="&amp;nbsp;Moniteurs patients&lt;br&gt;Câble RJ45 Cat6A&lt;br&gt;Chambres / Salle déchoc" vertex="1">
+          <mxGeometry height="60" width="140" x="190" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="P_iot_phy" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="💉 Équipements IoT&#xa;Réseau isolé VLAN 40&#xa;Switch dédié" vertex="1">
+          <mxGeometry height="50" width="150" x="120" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-4" parent="P_batA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="&amp;nbsp;Switch Access 24p&lt;br&gt;Cisco 2960 — VLAN 10&lt;br&gt;(Redondance)" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="P_batB" parent="page2" style="swimlane;startSize=32;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;fontColor=#1F4E79;strokeWidth=2;" value=" BÂTIMENT B — ADMINISTRATION" vertex="1">
+          <mxGeometry height="355" width="370" x="420" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="P_sw_adm_phy" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value="Switch Access 48p&lt;br&gt;Cisco 2960 — VLAN 20&lt;br&gt;Salle réseau RDC" vertex="1">
+          <mxGeometry height="60" width="160" x="20" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_ap_adm_phy" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="&amp;nbsp;2x Bornes WiFi&lt;br&gt;Cisco Aironet&lt;br&gt;Open Space + RDC" vertex="1">
+          <mxGeometry height="60" width="150" x="200" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_pc_adm_phy" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="&amp;nbsp;20 postes admin&lt;br&gt;Câble RJ45 Cat6A&lt;br&gt;Open space R+1" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="P_print_phy" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="&amp;nbsp;3 Imprimantes&lt;br&gt;Câble RJ45&lt;br&gt;Secrétariat" vertex="1">
+          <mxGeometry height="60" width="150" x="200" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="P_wifi_pat_phy" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="&amp;nbsp;Borne WiFi Patients&lt;br&gt;VLAN 50 isolé&lt;br&gt;Salle d&#39;attente" vertex="1">
+          <mxGeometry height="50" width="170" x="120" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-3" parent="P_batB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value="&amp;nbsp;Switch Access 48p&lt;br&gt;Cisco 2960 — VLAN 20&lt;br&gt;(Redondance)" vertex="1">
+          <mxGeometry height="60" width="160" x="20" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="P_batC" parent="page2" style="swimlane;startSize=32;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;fontColor=#375623;strokeWidth=2;" value=" BÂTIMENT C — LABORATOIRE" vertex="1">
+          <mxGeometry height="380" width="360" x="881" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="P_sw_lab_phy" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="Switch Access 24p&lt;br&gt;Cisco 2960 — VLAN 30&lt;br&gt;Salle réseau" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_analyseur_phy" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="&amp;nbsp;Analyseurs auto&lt;br&gt;Câble RJ45 Cat6A&lt;br&gt;Paillasses labo" vertex="1">
+          <mxGeometry height="60" width="140" x="190" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="P_pc_lab_phy" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="5 postes biologistes&lt;br&gt;Câble RJ45 Cat6A&lt;br&gt;Bureau labo" vertex="1">
+          <mxGeometry height="60" width="150" x="19" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="P_imprimante_lab" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Imprimante résultats&lt;br&gt;Câble RJ45&lt;br&gt;Accueil labo" vertex="1">
+          <mxGeometry height="60" width="140" x="190" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="P_congelateur" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="&amp;nbsp;Congélateurs connectés&lt;br&gt;VLAN 40 IoT&lt;br&gt;Chambre froide" vertex="1">
+          <mxGeometry height="50" width="150" x="109" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-2" parent="P_batC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="&amp;nbsp;Switch Access 24p&lt;br&gt;Cisco 2960 — VLAN 30&lt;br&gt;&lt;div&gt;(Redondance)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="P_e_dc_a" edge="1" parent="page2" source="P_datacenter" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#0000FF;strokeWidth=3;fontColor=#0000FF;fontSize=9;fontStyle=2;" target="P_batA" value="🔵 Fibre OM4 10Gbps&#xa;(Double brin redondant)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P_e_dc_b" edge="1" parent="page2" source="P_datacenter" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#0000FF;strokeWidth=3;fontColor=#0000FF;fontSize=9;fontStyle=2;" target="P_batB" value="🔵 Fibre OM4 10Gbps">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P_e_dc_c" edge="1" parent="page2" source="P_datacenter" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#0000FF;strokeWidth=3;fontColor=#0000FF;fontSize=9;fontStyle=2;" target="P_batC" value="🔵 Fibre OM4 10Gbps">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P_internet_phy" parent="page2" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" value="INTERNET&lt;br&gt;FAI 1 : Fibre 1Gbps (principal)&lt;br&gt;FAI 2 : Fibre 500Mbps (secours)" vertex="1">
+          <mxGeometry height="90" width="230" x="460" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="P_e_inet_dc" edge="1" parent="page2" source="P_internet_phy" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;strokeWidth=3;fontColor=#6c8ebf;fontSize=9;fontStyle=2;" target="P_datacenter" value="📡 Entrée opérateurs&#xa;Local technique RDC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="P_aws_phy" parent="page2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#FF6600;fontSize=11;fontStyle=1;fontColor=#FFFFFF;arcSize=15;" value="&amp;nbsp;AWS CLOUD&lt;br&gt;eu-west-3 (Paris)&lt;br&gt;VPN IPSec via FAI" vertex="1">
+          <mxGeometry height="70" width="160" x="1140" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="P_e_inet_aws" edge="1" parent="page2" source="P_internet_phy" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF6600;strokeWidth=2;dashed=1;" target="P_aws_phy">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="905" y="1050" />
+              <mxPoint x="905" y="1070" />
+              <mxPoint x="1100" y="1070" />
+              <mxPoint x="1100" y="1015" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="P_legend" parent="page2" style="swimlane;startSize=24;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="LÉGENDE CÂBLAGE" vertex="1">
+          <mxGeometry height="120" width="310" x="30" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="P_lg1" parent="P_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#0000FF;" value="🔵 ━━━  Fibre optique OM4 10Gbps (inter-bâtiments)" vertex="1">
+          <mxGeometry height="22" width="295" x="10" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="P_lg3" parent="P_legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#FF6600;" value="🟠 ╌╌╌  VPN IPSec chiffré vers AWS" vertex="1">
+          <mxGeometry height="22" width="295" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HgwVjY21qWnV57kyAg_l-5" edge="1" parent="P_legend" source="P_lg3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="P_lg3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
