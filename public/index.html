@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare — Portail Patient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#C2185B"/>
+        <path d="M16 7v18M7 16h18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">MediCare</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn" id="btn-nav-rdv" onclick="showSection('rdv-list')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Mes Rendez-vous
+      </button>
+      <button class="nav-btn" id="btn-nav-dossiers" onclick="showSection('dossiers-list')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+        Dossiers Médicaux
+      </button>
+      <button class="btn-magenta nav-book-btn" onclick="showSection('booking')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Prendre un RDV
+      </button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE DRAWER ── -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <button class="nav-btn" onclick="showSection('rdv-list'); closeMobileMenu()">Mes Rendez-vous</button>
+    <button class="nav-btn" onclick="showSection('dossiers-list'); closeMobileMenu()">Dossiers Médicaux</button>
+    <button class="btn-magenta" onclick="showSection('booking'); closeMobileMenu()">Prendre un RDV</button>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- ══ SECTION: HOME ══ -->
+    <section id="section-home" class="section active">
+      <div class="hero">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Portail Patient</p>
+          <h1 class="hero-title">Votre santé,<br/>notre priorité.</h1>
+          <p class="hero-sub">Prenez rendez-vous en ligne, consultez vos ordonnances et suivez vos résultats depuis votre espace personnel sécurisé.</p>
+          <div class="hero-actions">
+            <button class="btn-magenta btn-lg" onclick="showSection('booking')">Prendre un rendez-vous</button>
+            <button class="btn-outline btn-lg" onclick="showSection('rdv-list')">Voir mes RDV</button>
+          </div>
+        </div>
+        <div class="hero-card-stack">
+          <div class="stat-card">
+            <span class="stat-num">12</span>
+            <span class="stat-label">Spécialités disponibles</span>
+          </div>
+          <div class="stat-card accent">
+            <span class="stat-num">24h</span>
+            <span class="stat-label">Confirmation en ligne</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">48h</span>
+            <span class="stat-label">Délai moyen de RDV</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-access">
+        <h2 class="section-heading">Accès rapide</h2>
+        <div class="quick-grid">
+          <div class="quick-card" onclick="showSection('booking')">
+            <div class="quick-icon magenta">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+            </div>
+            <h3>Nouveau RDV</h3>
+            <p>Choisissez un médecin, une date et un créneau disponible.</p>
+          </div>
+          <div class="quick-card" onclick="showSection('rdv-list')">
+            <div class="quick-icon gray">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>Mes Rendez-vous</h3>
+            <p>Consultez, modifiez ou annulez vos rendez-vous existants.</p>
+          </div>
+          <div class="quick-card" onclick="showSection('dossiers-list')">
+            <div class="quick-icon gray">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+            </div>
+            <h3>Dossiers Médicaux</h3>
+            <p>Accédez à vos ordonnances, résultats et comptes rendus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: BOOKING ══ -->
+    <section id="section-booking" class="section">
+      <div class="section-header">
+        <button class="back-btn" onclick="showSection('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Retour
+        </button>
+        <h1 class="page-title">Prendre un rendez-vous</h1>
+      </div>
+
+      <div class="booking-layout">
+        <!-- Step 1: Doctor & Info -->
+        <div class="booking-card" id="step1">
+          <div class="step-badge">Étape 1</div>
+          <h2>Informations patient & médecin</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="patient-name">Nom complet</label>
+              <input type="text" id="patient-name" placeholder="Sophie Martin" />
+            </div>
+            <div class="form-group">
+              <label for="patient-id">Numéro de patient</label>
+              <input type="text" id="patient-id" placeholder="P001" />
+            </div>
+            <div class="form-group full">
+              <label for="specialty-select">Spécialité</label>
+              <select id="specialty-select" onchange="updateDoctors()">
+                <option value="">-- Choisir une spécialité --</option>
+                <option value="Médecine Générale">Médecine Générale</option>
+                <option value="Cardiologie">Cardiologie</option>
+                <option value="Dermatologie">Dermatologie</option>
+                <option value="Orthopédie">Orthopédie</option>
+                <option value="Pédiatrie">Pédiatrie</option>
+                <option value="Gynécologie">Gynécologie</option>
+                <option value="Neurologie">Neurologie</option>
+                <option value="Ophtalmologie">Ophtalmologie</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="doctor-select">Médecin</label>
+              <select id="doctor-select" onchange="fetchSlots()">
+                <option value="">-- Choisir un médecin --</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="rdv-notes">Notes / Motif (optionnel)</label>
+              <textarea id="rdv-notes" rows="3" placeholder="Décrivez brièvement le motif de votre visite..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Calendar -->
+        <div class="booking-card" id="step2">
+          <div class="step-badge">Étape 2</div>
+          <h2>Choisir une date</h2>
+          <div class="calendar-wrapper">
+            <div class="cal-header">
+              <button class="cal-nav" id="prev-month" onclick="changeMonth(-1)">&#8249;</button>
+              <span class="cal-month-label" id="cal-month-label"></span>
+              <button class="cal-nav" id="next-month" onclick="changeMonth(1)">&#8250;</button>
+            </div>
+            <div class="cal-weekdays">
+              <span>Lun</span><span>Mar</span><span>Mer</span>
+              <span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span>
+            </div>
+            <div class="cal-grid" id="cal-grid"></div>
+          </div>
+        </div>
+
+        <!-- Step 3: Time Slots -->
+        <div class="booking-card" id="step3">
+          <div class="step-badge">Étape 3</div>
+          <h2>Choisir un créneau</h2>
+          <div id="slots-container">
+            <p class="slots-placeholder">Sélectionnez un médecin et une date pour voir les créneaux disponibles.</p>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="booking-card summary-card" id="step4">
+          <h2>Récapitulatif</h2>
+          <div class="summary-body" id="summary-body">
+            <p class="summary-empty">Complétez les étapes ci-dessus pour voir le récapitulatif.</p>
+          </div>
+          <button class="btn-magenta btn-full" id="confirm-btn" onclick="confirmBooking()" disabled>
+            Confirmer le rendez-vous
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: RDV LIST ══ -->
+    <section id="section-rdv-list" class="section">
+      <div class="section-header">
+        <button class="back-btn" onclick="showSection('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Retour
+        </button>
+        <h1 class="page-title">Mes Rendez-vous</h1>
+        <button class="btn-magenta" onclick="showSection('booking')">+ Nouveau RDV</button>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="rdv-filter-patient" placeholder="Filtrer par n° patient..." oninput="loadRdvList()" />
+        <select id="rdv-filter-status" onchange="loadRdvList()">
+          <option value="">Tous les statuts</option>
+          <option value="confirmed">Confirmé</option>
+          <option value="cancelled">Annulé</option>
+        </select>
+      </div>
+
+      <div id="rdv-list-container" class="list-container">
+        <p class="loading-msg">Chargement...</p>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: DOSSIERS LIST ══ -->
+    <section id="section-dossiers-list" class="section">
+      <div class="section-header">
+        <button class="back-btn" onclick="showSection('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Retour
+        </button>
+        <h1 class="page-title">Dossiers Médicaux</h1>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="dm-filter-patient" placeholder="Filtrer par n° patient..." oninput="loadDossiersList()" />
+        <select id="dm-filter-type" onchange="loadDossiersList()">
+          <option value="">Tous les types</option>
+          <option value="Analyse de sang">Analyse de sang</option>
+          <option value="Radiographie">Radiographie</option>
+          <option value="Ordonnance">Ordonnance</option>
+          <option value="Compte rendu">Compte rendu</option>
+          <option value="Vaccination">Vaccination</option>
+        </select>
+      </div>
+
+      <div id="dossiers-list-container" class="list-container">
+        <p class="loading-msg">Chargement...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ── MODAL: Cancel Confirm ── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="modal-title">Confirmer l'annulation</h3>
+      <p id="modal-body">Êtes-vous sûr de vouloir annuler ce rendez-vous ?</p>
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal()">Retour</button>
+        <button class="btn-magenta" id="modal-confirm-btn">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "rdv": [
+    {
+      "id": "rdv_001",
+      "patient_id": "P001",
+      "patient_name": "Sophie Martin",
+      "doctor": "Dr. Bernard",
+      "specialty": "Cardiology",
+      "date": "2026-06-15",
+      "time": "09:00",
+      "notes": "Annual heart checkup",
+      "status": "confirmed",
+      "created_at": "2026-06-01T10:00:00.000Z"
+    },
+    {
+      "id": "rdv_002",
+      "patient_id": "P001",
+      "patient_name": "Sophie Martin",
+      "doctor": "Dr. Leclerc",
+      "specialty": "General Medicine",
+      "date": "2026-06-20",
+      "time": "14:30",
+      "notes": "Routine checkup",
+      "status": "confirmed",
+      "created_at": "2026-06-02T11:00:00.000Z"
+    }
+  ],
+  "dossiers_medicaux": [
+    {
+      "id": "dm_001",
+      "patient_id": "P001",
+      "patient_name": "Sophie Martin",
+      "type": "Analyse de sang",
+      "doctor": "Dr. Leclerc",
+      "description": "Bilan sanguin complet. Résultats normaux. Cholestérol légèrement élevé.",
+      "date": "2026-03-10",
+      "attachments": [],
+      "created_at": "2026-03-10T09:00:00.000Z"
+    },
+    {
+      "id": "dm_002",
+      "patient_id": "P001",
+      "patient_name": "Sophie Martin",
+      "type": "Radiographie",
+      "doctor": "Dr. Bernard",
+      "description": "Radiographie thoracique. Poumons clairs, aucune anomalie détectée.",
+      "date": "2026-01-22",
+      "attachments": [],
+      "created_at": "2026-01-22T14:00:00.000Z"
+    }
+  ]
+}
