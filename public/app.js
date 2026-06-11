@@ -5,6 +5,17 @@
 const API = 'http://localhost:3000/api';
 
 /* ─── Navigation ─────────────────────────────────────────────────────────── */
+
+// Load doctors from DB into the select on page load
+async function loadPersonnel() {
+    const res = await fetch(`${API}/personnel`);
+    const list = await res.json();
+    const sel = document.getElementById('doctor-select');
+    sel.innerHTML = '<option value="">-- Choisir un médecin --</option>' +
+        list.map(p => `<option value="${p.personnel_id}">${p.prenom} ${p.nom} — ${p.profession}</option>`).join('');
+}
+
+
 function showSection(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(`section-${name}`);
@@ -14,7 +25,9 @@ function showSection(name) {
   }
   if (name === 'rdv-list')      loadRdvList();
   if (name === 'dossiers-list') loadDossiersList();
-  if (name === 'booking')       initCalendar();
+    if (name === 'booking') {
+        initCalendar(); loadPersonnel();
+    }
 }
 
 function toggleMobileMenu() {
@@ -47,28 +60,27 @@ function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
 }
 
-/* ─── Doctors by specialty ───────────────────────────────────────────────── */
-const DOCTORS_MAP = {
-  'Médecine Générale': ['Dr. Leclerc', 'Dr. Moreau', 'Dr. Petit'],
-  'Cardiologie':       ['Dr. Bernard', 'Dr. Dupont'],
-  'Dermatologie':      ['Dr. Lambert', 'Dr. Simon'],
-  'Orthopédie':        ['Dr. Rousseau', 'Dr. Michel'],
-  'Pédiatrie':         ['Dr. Blanc', 'Dr. Fontaine'],
-  'Gynécologie':       ['Dr. Mercier', 'Dr. Gaillard'],
-  'Neurologie':        ['Dr. Perrin', 'Dr. Chevalier'],
-  'Ophtalmologie':     ['Dr. Legrand', 'Dr. Gautier'],
-};
-
-function updateDoctors() {
-  const spec  = document.getElementById('specialty-select').value;
-  const sel   = document.getElementById('doctor-select');
-  const docs  = DOCTORS_MAP[spec] || [];
-  sel.innerHTML = '<option value="">-- Choisir un médecin --</option>' +
-    docs.map(d => `<option value="${d}">${d}</option>`).join('');
-  selectedSlot = null;
-  selectedDate = null;
-  updateSummary();
-  fetchSlots();
+/* ─── Doctors from DB ────────────────────────────────────────────────────── */
+async function loadPersonnel() {
+    try {
+        const specialty = document.getElementById('specialty-select').value;
+        const url = specialty
+            ? `${API}/personnel?service=${encodeURIComponent(specialty)}`
+            : `${API}/personnel`;
+        const res = await fetch(url);
+        const list = await res.json();
+        const sel = document.getElementById('doctor-select');
+        sel.innerHTML = '<option value="">-- Choisir un médecin --</option>' +
+            list.map(p =>
+                `<option value="${p.personnel_id}">${p.prenom} ${p.nom} — ${p.profession}</option>`
+            ).join('');
+        selectedSlot = null;
+        selectedDate = null;
+        updateSummary();
+        fetchSlots();
+    } catch (e) {
+        console.error('Impossible de charger le personnel', e);
+    }
 }
 
 /* ─── Calendar ───────────────────────────────────────────────────────────── */
@@ -164,7 +176,7 @@ async function fetchSlots() {
   container.innerHTML = '<p class="slots-placeholder">Chargement des créneaux...</p>';
 
   try {
-    const res  = await fetch(`${API}/slots?doctor=${encodeURIComponent(doctor)}&date=${selectedDate}`);
+    const res  = await fetch(`${API}/slots?medecin_id=${encodeURIComponent(doctor)}&date=${selectedDate}`);
     const slots = await res.json();
 
     const dateLabel = document.createElement('p');
@@ -197,8 +209,10 @@ async function fetchSlots() {
 function updateSummary() {
   const patientName = document.getElementById('patient-name').value.trim();
   const patientId   = document.getElementById('patient-id').value.trim();
-  const doctor      = document.getElementById('doctor-select').value;
-  const specialty   = document.getElementById('specialty-select').value;
+    const doctorSel = document.getElementById('doctor-select');
+    const doctor = doctorSel.value;
+    const doctorLabel = doctorSel.options[doctorSel.selectedIndex]?.text || '';
+    const specialty = document.getElementById('specialty-select').value;
   const body        = document.getElementById('summary-body');
   const confirmBtn  = document.getElementById('confirm-btn');
 
@@ -219,7 +233,7 @@ function updateSummary() {
   body.innerHTML = `
     <div class="summary-row"><span class="summary-key">Patient</span><span class="summary-val">${patientName}</span></div>
     <div class="summary-row"><span class="summary-key">N° Patient</span><span class="summary-val">${patientId}</span></div>
-    <div class="summary-row"><span class="summary-key">Médecin</span><span class="summary-val">${doctor}</span></div>
+    <div class="summary-row"><span class="summary-key">Médecin</span><span class="summary-val">${doctorLabel}</span></div>
     <div class="summary-row"><span class="summary-key">Spécialité</span><span class="summary-val">${specialty}</span></div>
     <div class="summary-row"><span class="summary-key">Date</span><span class="summary-val">${formatDateFR(selectedDate)}</span></div>
     <div class="summary-row"><span class="summary-key">Heure</span><span class="summary-val">${selectedSlot}</span></div>
@@ -233,11 +247,11 @@ document.getElementById('patient-id').addEventListener('input', updateSummary);
 
 async function confirmBooking() {
   const payload = {
-    patient_id:   document.getElementById('patient-id').value.trim(),
+    patient_id: parseInt(document.getElementById('patient-id').value.trim()),
     patient_name: document.getElementById('patient-name').value.trim(),
-    doctor:       document.getElementById('doctor-select').value,
+    medecin_id: parseInt(document.getElementById('doctor-select').value),
     specialty:    document.getElementById('specialty-select').value,
-    date:         selectedDate,
+    date_rdv: `${selectedDate}T${selectedSlot}:00`,
     time:         selectedSlot,
     notes:        document.getElementById('rdv-notes').value.trim(),
   };
